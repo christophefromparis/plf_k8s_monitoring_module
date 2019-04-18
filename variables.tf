@@ -47,3 +47,5 @@ variable "fluentd_metrics_port" {
   description = "The metrics port of the Fluentd service"
   default     = "24231"
 }
+
+variable "cluster_ca_certificate" {}
