@@ -1,0 +1,12 @@
+
+ingress:
+  enabled: ${kibana_ingress_enabled}
+  annotations:
+    kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+  - ${kibana_host}
+  tls:
+  - secretName: kibana-tls
+    hosts:
+    - ${kibana_host}

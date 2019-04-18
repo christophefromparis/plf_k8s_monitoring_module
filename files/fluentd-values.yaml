@@ -1,0 +1,34 @@
+service:
+  type: ClusterIP
+  externalPort: 80
+  ports:
+    - name: "monitor-agent"
+      protocol: TCP
+      containerPort: 24220
+    - name: "forward"
+      protocol: TCP
+      containerPort: ${forward_port}
+    - name: "metrics"
+      protocol: TCP
+      containerPort: ${metrics_port}
+
+annotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "${metrics_port}"
+
+configMaps:
+  prometheus.conf: |
+    # expose metrics in prometheus format
+    <source>
+      @type prometheus
+      bind 0.0.0.0
+      port ${metrics_port}
+      metrics_path /metrics
+    </source>
+    <source>
+      @type prometheus_output_monitor
+      interval 10
+      <labels>
+        hostname $${hostname}
+      </labels>
+    </source>

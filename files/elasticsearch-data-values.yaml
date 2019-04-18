@@ -1,0 +1,29 @@
+---
+clusterName: "elasticsearch"
+nodeGroup: "data"
+
+# The service that non master groups will try to connect to when joining the cluster
+# This should be set to clusterName + "-" + nodeGroup for your master group
+masterService: "elasticsearch-master"
+
+# Elasticsearch roles that will be applied to this nodeGroup
+# These will be set as environment variables. E.g. node.master=true
+roles:
+  master: "false"
+  ingest: "true"
+  data: "true"
+
+replicas: 2
+
+volumeClaimTemplate:
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: ${es_storageclass_name}
+  resources:
+    requests:
+      storage: 30Gi
+
+extraEnvs:
+- name: 'XPACK_SECURITY_ENABLED'
+  value: 'true'
+- name: 'XPACK_MONITORING_COLLECTION_ENABLED'
+  value: 'true'

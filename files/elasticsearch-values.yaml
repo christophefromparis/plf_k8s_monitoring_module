@@ -1,0 +1,39 @@
+---
+clusterName: "elasticsearch"
+nodeGroup: "master"
+
+# Elasticsearch roles that will be applied to this nodeGroup
+roles:
+  master: "true"
+  ingest: "false"
+  data: "false"
+
+replicas: 2
+
+volumeClaimTemplate:
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: ${es_storageclass_name}
+  resources:
+    requests:
+      storage: 30Gi
+
+#  Enabling this will publically expose your Elasticsearch instance.
+# Only enable this if you have security enabled on your cluster
+ingress:
+  enabled: ${es_ingress_enabled}
+  annotations:
+    # kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+  - ${es_host}
+  tls:
+  - secretName: elasticsearch-tls
+    hosts:
+    - ${es_host}
+
+extraEnvs:
+  - name: 'XPACK_SECURITY_ENABLED'
+    value: 'true'
+  - name: 'XPACK_MONITORING_COLLECTION_ENABLED'
+    value: 'true'
