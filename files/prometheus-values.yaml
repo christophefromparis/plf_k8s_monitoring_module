@@ -835,9 +835,9 @@ serverFiles:
         - prometheus-server:80
       relabel_configs:
       - target_label: source
-        replacement: k8s-veolia
+        replacement: ${source}
       - target_label: instance
-        replacement: k8s-veolia
+        replacement: ${source}
 
     - job_name: 'elasticsearch-exporter'
       static_configs:
@@ -845,9 +845,9 @@ serverFiles:
         - elasticsearch-exporter:9108
       relabel_configs:
       - target_label: source
-        replacement: k8s-veolia
+        replacement: ${source}
       - target_label: instance
-        replacement: k8s-veolia
+        replacement: ${source}
 
     # Scrape config for API servers.
     #
@@ -893,7 +893,7 @@ serverFiles:
       - target_label: __address__
         replacement: kubernetes.default.svc:443
       - target_label: source
-        replacement: k8s-veolia
+        replacement: ${source}
 
     - job_name: 'kubernetes-nodes'
 
@@ -931,7 +931,7 @@ serverFiles:
         target_label: __metrics_path__
         replacement: /api/v1/nodes/$${1}/proxy/metrics
       - target_label: source
-        replacement: k8s-veolia
+        replacement: ${source}
 
     - job_name: 'kubernetes-nodes-cadvisor'
 
@@ -974,7 +974,7 @@ serverFiles:
         target_label: __metrics_path__
         replacement: /api/v1/nodes/$${1}/proxy/metrics/cadvisor
       - target_label: source
-        replacement: k8s-veolia
+        replacement: ${source}
 
     # Scrape config for service endpoints.
     #
@@ -1021,7 +1021,7 @@ serverFiles:
         action: replace
         target_label: instance
       - target_label: source
-        replacement: k8s-veolia
+        replacement: ${source}
 
     #    - job_name: 'prometheus-pushgateway'
     #      honor_labels: true
@@ -1067,7 +1067,7 @@ serverFiles:
       - source_labels: [__meta_kubernetes_service_name]
         target_label: kubernetes_name
       - target_label: source
-        replacement: k8s-veolia
+        replacement: ${source}
 
     # Example scrape config for pods
     #
@@ -1105,7 +1105,7 @@ serverFiles:
         action: replace
         target_label: kubernetes_pod_name
       - target_label: source
-        replacement: k8s-veolia
+        replacement: ${source}
 
     # ---------------------------------
 

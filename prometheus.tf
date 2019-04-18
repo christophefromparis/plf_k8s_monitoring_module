@@ -5,6 +5,7 @@ data "template_file" "prometheus-template" {
   vars {
     prometheus_host   = "prometheus.${var.fqdn_suffix}"
     alertmanager_host = "alertmanager.${var.fqdn_suffix}"
+    source            = "${var.cluster_provider == "google" ? "GKE" : "EKS"}"
   }
 }
 
@@ -32,7 +33,7 @@ resource "helm_release" "prometheus" {
 
   set {
     name  = "server.global.external_labels.source"
-    value = "k8s-veolia"
+    value = "${var.cluster_provider == "google" ? "GKE" : "EKS"}"
   }
 
   set {
