@@ -17,7 +17,9 @@ variable "cluster_dns" {
 variable "monitoring_namespace" {
   description = "The monitoring namespace name"
 }
-
+variable "cluster_provider" {
+  description = "The Kubernetes cluster provider (google or aws at the moment)"
+}
 # ------------------------
 # --------- DNS ---------
 # ------------------------

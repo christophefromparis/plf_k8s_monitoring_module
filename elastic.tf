@@ -11,7 +11,7 @@ data "template_file" "elasticsearch" {
   vars {
     es_ingress_enabled   = "true"
     es_host              = "elasticsearch.${var.fqdn_suffix}"
-    es_storageclass_name = "gp2"
+    es_storageclass_name = "${var.cluster_provider == "google" ? "ssd" : "gp2"}"
   }
 }
 
@@ -34,7 +34,7 @@ data "template_file" "elasticsearch-data-template" {
   template = "${file("${path.module}/files/elasticsearch-data-values.yaml")}"
 
   vars {
-    es_storageclass_name = "gp2"
+    es_storageclass_name = "${var.cluster_provider == "google" ? "ssd" : "gp2"}"
   }
 }
 
