@@ -7,7 +7,7 @@ data "template_file" "redis" {
 resource "helm_release" "redis" {
   name      = "redis"
   chart     = "stable/redis-ha"
-  version   = "${lookup(var.helm_version, "redis")}"
+  version   = "${lookup(var.helm_version, "redis-ha")}"
   namespace = "${var.monitoring_ns}"
   timeout   = "600"
 
