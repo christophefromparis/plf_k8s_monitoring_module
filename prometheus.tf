@@ -14,7 +14,8 @@ resource "helm_release" "prometheus" {
   name         = "prometheus"
   chart        = "stable/prometheus"
   version      = "${lookup(var.helm_version, "prometheus")}"
-  namespace    = "${lookup(var.namespace_name, "monitoring")}"
+  //namespace    = "${lookup(var.namespace_name, "monitoring")}"
+  namespace = "${var.monitoring_ns}"
   timeout      = "600"
 
   values = [

@@ -49,3 +49,5 @@ variable "fluentd_metrics_port" {
 }
 
 variable "cluster_ca_certificate" {}
+
+variable "monitoring_ns" {}
