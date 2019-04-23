@@ -5,13 +5,13 @@ variable "cluster_dns" {
   description = "The K8S cluster DNS name"
   default     = "cluster.local"
 }
-variable "monitoring_namespace" {
-  description = "The monitoring namespace name"
-}
 variable "cluster_provider" {
   description = "The Kubernetes cluster provider (google or aws at the moment)"
 }
-
+variable "namespace_name" {
+  description = "The default namespace name"
+  type = "map"
+}
 # ------------------------
 # --------- DNS ---------
 # ------------------------
