@@ -8,7 +8,7 @@ resource "helm_release" "redis" {
   name      = "redis"
   chart     = "stable/redis-ha"
   version   = "${lookup(var.helm_version, "redis")}"
-  namespace = "${lookup(var.namespace_name, "monitoring")}"
+  namespace = "${var.monitoring_ns}"
   timeout   = "600"
 
   values = [

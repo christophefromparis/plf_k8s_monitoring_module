@@ -30,7 +30,7 @@ resource "helm_release" "grafana" {
   name      = "grafana"
   chart     = "stable/grafana"
   version   = "${lookup(var.helm_version, "grafana")}"
-  namespace = "${lookup(var.namespace_name, "monitoring")}"
+  namespace = "${var.monitoring_ns}"
   timeout   = "120"
 
   values = [
@@ -74,7 +74,7 @@ resource "kubernetes_config_map" "dashboard" {
 
   "metadata" {
     name = "grafana-dashboard-${count.index}"
-    namespace = "${lookup(var.namespace_name, "monitoring")}"
+    namespace = "${var.monitoring_ns}"
     labels {
       grafana_dashboard = ""
     }

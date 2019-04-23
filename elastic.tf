@@ -21,7 +21,7 @@ resource "helm_release" "elasticsearch" {
   name       = "elasticsearch"
   chart      = "elastic/elasticsearch"
   version    = "${lookup(var.helm_version, "elasticsearch")}"
-  namespace  = "${lookup(var.namespace_name, "monitoring")}"
+  namespace  = "${var.monitoring_ns}"
   timeout    = "300"
 
   values = [
@@ -43,7 +43,7 @@ resource "helm_release" "elasticsearch-data" {
   name      = "elasticsearch-data"
   chart     = "elastic/elasticsearch"
   version   = "${lookup(var.helm_version, "elasticsearch")}"
-  namespace = "${lookup(var.namespace_name, "monitoring")}"
+  namespace = "${var.monitoring_ns}"
   timeout   = "300"
 
   values = [
@@ -58,7 +58,7 @@ resource "helm_release" "elasticsearch-exporter" {
   name      = "elasticsearch-exporter"
   chart     = "stable/elasticsearch-exporter"
   version   = "${lookup(var.helm_version, "es-exporter")}"
-  namespace = "${lookup(var.namespace_name, "monitoring")}"
+  namespace = "${var.monitoring_ns}"
   timeout   = "300"
 
   set {

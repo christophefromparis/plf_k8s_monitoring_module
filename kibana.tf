@@ -13,7 +13,7 @@ resource "helm_release" "kibana" {
   name      = "kibana"
   chart     = "elastic/kibana"
   version   = "${lookup(var.helm_version, "kibana")}"
-  namespace = "${lookup(var.namespace_name, "monitoring")}"
+  namespace = "${var.monitoring_ns}"
   timeout   = "300"
 
   values = [

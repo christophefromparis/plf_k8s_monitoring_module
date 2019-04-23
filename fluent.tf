@@ -13,7 +13,7 @@ resource "helm_release" "fluentd" {
   name      = "fluentd"
   chart     = "stable/fluentd"
   version   = "${lookup(var.helm_version, "fluentd")}"
-  namespace = "${lookup(var.namespace_name, "monitoring")}"
+  namespace = "${var.monitoring_ns}"
   timeout   = "300"
 
   values = [
@@ -38,7 +38,7 @@ resource "helm_release" "fluent-bit" {
   name      = "fluent-bit"
   chart     = "stable/fluent-bit"
   version   = "${lookup(var.helm_version, "fluent-bit")}"
-  namespace = "${lookup(var.namespace_name, "monitoring")}"
+  namespace = "${var.monitoring_ns}"
   timeout   = "300"
 
   values = [
