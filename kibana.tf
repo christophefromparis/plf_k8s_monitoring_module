@@ -10,11 +10,12 @@ data "template_file" "kibana-template" {
 
 # --- We install Kibana ---
 resource "helm_release" "kibana" {
-  name      = "kibana"
-  chart     = "elastic/kibana"
-  version   = "${lookup(var.helm_version, "kibana")}"
-  namespace = "${var.monitoring_ns}"
-  timeout   = "300"
+  repository = "${data.helm_repository.elastic.name}"
+  name       = "kibana"
+  chart      = "elastic/kibana"
+  version    = "${lookup(var.helm_version, "kibana")}"
+  namespace  = "${var.monitoring_ns}"
+  timeout    = "300"
 
   values = [
     "${data.template_file.kibana-template.rendered}"
