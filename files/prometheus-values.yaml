@@ -1079,6 +1079,8 @@ serverFiles:
     # * `prometheus.io/port`: Scrape the pod on the indicated port instead of the default of `9102`.
 
     - job_name: 'kubernetes-pods'
+      scrape_interval: 5s
+      scrape_timeout: 3s
 
       kubernetes_sd_configs:
       - role: pod
