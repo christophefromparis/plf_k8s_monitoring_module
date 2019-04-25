@@ -1,9 +1,7 @@
 # --- We add the Elastic helm repository
 data "helm_repository" "elastic" {
-  name = "elastic"
+  name = "elastic-${var.stable_helm_repository}"
   url  = "https://helm.elastic.co"
-
-  depends_on = ["${var.stable_helm_repository}"]
 }
 
 # ---  We prepare the elasticsearch-values.yaml ---
