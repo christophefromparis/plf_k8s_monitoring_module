@@ -2,6 +2,8 @@
 data "helm_repository" "elastic" {
   name = "elastic"
   url  = "https://helm.elastic.co"
+
+  depends_on = ["${var.stable_helm_repository}"]
 }
 
 # ---  We prepare the elasticsearch-values.yaml ---

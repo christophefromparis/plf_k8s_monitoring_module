@@ -46,3 +46,5 @@ variable "fluentd_metrics_port" {
   description = "The metrics port of the Fluentd service"
   default     = "24231"
 }
+
+variable "stable_helm_repository" {}
