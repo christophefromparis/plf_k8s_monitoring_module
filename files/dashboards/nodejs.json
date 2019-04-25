@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 10,
+  "id": 11,
   "links": [],
   "panels": [
     {
@@ -142,7 +142,8 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Nodejs Hit DEV",
+      "title": "NodeJS Hits on Dev",
+      "transparent": true,
       "type": "singlestat",
       "valueFontSize": "150%",
       "valueMaps": [
@@ -166,6 +167,7 @@
         "x": 0,
         "y": 8
       },
+      "hideTimeOverride": false,
       "id": 4,
       "legend": {
         "avg": false,
@@ -177,7 +179,7 @@
         "values": false
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
       "paceLength": 10,
@@ -187,12 +189,15 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "stack": false,
-      "steppedLine": false,
+      "steppedLine": true,
       "targets": [
         {
-          "expr": "tot_request_example",
+          "expr": "sum(tot_request_example)",
           "format": "time_series",
+          "instant": false,
+          "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -200,7 +205,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Hit by namespaces",
+      "title": "Hits",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -216,8 +221,9 @@
       },
       "yaxes": [
         {
+          "decimals": 0,
           "format": "short",
-          "label": null,
+          "label": "",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -238,7 +244,7 @@
       }
     }
   ],
-  "refresh": "30s",
+  "refresh": "5s",
   "schemaVersion": 18,
   "style": "dark",
   "tags": [
@@ -248,7 +254,7 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -277,7 +283,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "NodeJS (v0.2)",
+  "title": "NodeJS (v0.3)",
   "uid": null,
   "version": 1
 }
