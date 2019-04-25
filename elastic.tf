@@ -28,6 +28,8 @@ resource "helm_release" "elasticsearch" {
   values = [
     "${data.template_file.elasticsearch.rendered}"
   ]
+
+  depends_on = ["data.helm_repository.elastic"]
 }
 
 # ---  We prepare the elasticsearch-data-values.yaml ---
