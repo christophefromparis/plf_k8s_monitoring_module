@@ -20,7 +20,7 @@ data "template_file" "elasticsearch" {
 resource "helm_release" "elasticsearch" {
   repository = "${data.helm_repository.elasticrepo.name}"
   name       = "elasticsearch"
-  chart      = "elastic/elasticsearch"
+  chart      = "elasticsearch"
   version    = "${lookup(var.helm_version, "elasticsearch")}"
   namespace  = "${var.monitoring_ns}"
   timeout    = "300"
@@ -45,7 +45,7 @@ data "template_file" "elasticsearch-data-template" {
 resource "helm_release" "elasticsearch-data" {
   repository = "${data.helm_repository.elasticrepo.name}"
   name      = "elasticsearch-data"
-  chart     = "elastic/elasticsearch"
+  chart     = "elasticsearch"
   version   = "${lookup(var.helm_version, "elasticsearch")}"
   namespace = "${var.monitoring_ns}"
   timeout   = "300"
