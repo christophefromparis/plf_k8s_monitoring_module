@@ -1,5 +1,6 @@
 # --- We add the Elastic helm repository
 data "helm_repository" "elastic" {
+  # tip to avoid use of this repo before init of helm
   name = "elastic-${var.stable_helm_repository}"
   url  = "https://helm.elastic.co"
 }
@@ -17,7 +18,7 @@ data "template_file" "elasticsearch" {
 
 # --- We install the Elasticsearch masters ---
 resource "helm_release" "elasticsearch" {
-  repository = "${data.helm_repository.elastic.name}"
+  repository = "${data.helm_repository.elastic.metadata.0.name}"
   name       = "elasticsearch"
   chart      = "elastic/elasticsearch"
   version    = "${lookup(var.helm_version, "elasticsearch")}"
@@ -40,6 +41,7 @@ data "template_file" "elasticsearch-data-template" {
 
 # --- We install the Elasticsearch data ---
 resource "helm_release" "elasticsearch-data" {
+  repository = "${data.helm_repository.elastic.metadata.0.name}"
   name      = "elasticsearch-data"
   chart     = "elastic/elasticsearch"
   version   = "${lookup(var.helm_version, "elasticsearch")}"

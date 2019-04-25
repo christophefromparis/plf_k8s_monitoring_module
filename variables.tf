@@ -11,6 +11,10 @@ variable "cluster_provider" {
 variable "monitoring_ns" {
   description = "The monitoring namespace name"
 }
+variable "stable_helm_repository" {
+  description = "The stable helm repository name"
+}
+
 # ------------------------
 # --------- DNS ---------
 # ------------------------
@@ -46,5 +50,3 @@ variable "fluentd_metrics_port" {
   description = "The metrics port of the Fluentd service"
   default     = "24231"
 }
-
-variable "stable_helm_repository" {}
