@@ -1,5 +1,5 @@
 # --- We add the Elastic helm repository
-data "helm_repository" "elasticrepo" {
+data "helm_repository" "elastic" {
   # tip to avoid use of this repo before init of helm
   name = "elastic-${var.stable_helm_repository}"
   url  = "https://helm.elastic.co"
@@ -18,7 +18,7 @@ data "template_file" "elasticsearch" {
 
 # --- We install the Elasticsearch masters ---
 resource "helm_release" "elasticsearch" {
-  repository = "${data.helm_repository.elasticrepo.name}"
+  repository = "${data.helm_repository.elastic.name}"
   name       = "elasticsearch"
   chart      = "elasticsearch"
   version    = "${lookup(var.helm_version, "elasticsearch")}"
@@ -29,7 +29,7 @@ resource "helm_release" "elasticsearch" {
     "${data.template_file.elasticsearch.rendered}"
   ]
 
-  depends_on = ["data.helm_repository.elasticrepo"]
+  depends_on = ["data.helm_repository.elastic"]
 }
 
 # ---  We prepare the elasticsearch-data-values.yaml ---
@@ -43,7 +43,7 @@ data "template_file" "elasticsearch-data-template" {
 
 # --- We install the Elasticsearch data ---
 resource "helm_release" "elasticsearch-data" {
-  repository = "${data.helm_repository.elasticrepo.name}"
+  repository = "${data.helm_repository.elastic.name}"
   name      = "elasticsearch-data"
   chart     = "elasticsearch"
   version   = "${lookup(var.helm_version, "elasticsearch")}"
@@ -54,7 +54,7 @@ resource "helm_release" "elasticsearch-data" {
     "${data.template_file.elasticsearch-data-template.rendered}"
   ]
 
-  depends_on = ["data.helm_repository.elasticrepo", "data.template_file.elasticsearch-data-template", "helm_release.elasticsearch"]
+  depends_on = ["data.helm_repository.elastic", "data.template_file.elasticsearch-data-template", "helm_release.elasticsearch"]
 }
 
 # --- We install the elasticsearch-exporter ---
