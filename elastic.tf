@@ -18,7 +18,7 @@ data "template_file" "elasticsearch" {
 
 # --- We install the Elasticsearch masters ---
 resource "helm_release" "elasticsearch" {
-  repository = "${data.helm_repository.elastic.metadata.0.name}"
+  repository = "${data.helm_repository.elastic.name}"
   name       = "elasticsearch"
   chart      = "elastic/elasticsearch"
   version    = "${lookup(var.helm_version, "elasticsearch")}"
@@ -43,7 +43,7 @@ data "template_file" "elasticsearch-data-template" {
 
 # --- We install the Elasticsearch data ---
 resource "helm_release" "elasticsearch-data" {
-  repository = "${data.helm_repository.elastic.metadata.0.name}"
+  repository = "${data.helm_repository.elastic.name}"
   name      = "elasticsearch-data"
   chart     = "elastic/elasticsearch"
   version   = "${lookup(var.helm_version, "elasticsearch")}"
