@@ -10,7 +10,7 @@ data "template_file" "kibana-template" {
 
 # --- We install Kibana ---
 resource "helm_release" "kibana" {
-  repository = "${data.helm_repository.elastic.name}"
+  repository = "${data.helm_repository.elasticrepo.name}"
   name       = "kibana"
   chart      = "elastic/kibana"
   version    = "${lookup(var.helm_version, "kibana")}"
@@ -21,5 +21,5 @@ resource "helm_release" "kibana" {
     "${data.template_file.kibana-template.rendered}"
   ]
 
-  depends_on = ["data.helm_repository.elastic", "data.template_file.kibana-template", "helm_release.elasticsearch-data"]
+  depends_on = ["data.helm_repository.elasticrepo", "data.template_file.kibana-template", "helm_release.elasticsearch-data"]
 }
