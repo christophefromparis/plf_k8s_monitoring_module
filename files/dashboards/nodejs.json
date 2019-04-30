@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 3,
   "links": [],
   "panels": [
     {
@@ -42,12 +42,12 @@
           {
             "color": "#FF9830",
             "index": 1,
-            "value": 3
+            "value": 3.33
           },
           {
             "color": "#F2495C",
             "index": 2,
-            "value": 6
+            "value": 6.66
           }
         ],
         "valueMappings": [],
@@ -275,6 +275,10 @@
         {
           "alias": "Instances",
           "yaxis": 2
+        },
+        {
+          "alias": "Instances number",
+          "yaxis": 2
         }
       ],
       "stack": false,
@@ -286,14 +290,14 @@
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "Requests",
+          "legendFormat": "Requests rate",
           "refId": "A"
         },
         {
           "expr": "sum(kube_pod_container_status_running{container=\"nodejs-example\",namespace=\"dev\"})",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Instances",
+          "legendFormat": "Instances number",
           "refId": "B"
         }
       ],
@@ -379,7 +383,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "NodeJS (v0.5.1)",
+  "title": "NodeJS (v0.5.2)",
   "uid": null,
-  "version": 1
+  "version": 2
 }
