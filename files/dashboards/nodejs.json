@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 11,
+  "id": 4,
   "links": [],
   "panels": [
     {
@@ -271,18 +271,30 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [
+        {
+          "alias": "Instances",
+          "yaxis": 2
+        }
+      ],
       "stack": false,
       "steppedLine": true,
       "targets": [
         {
-          "expr": "sum(tot_request_example)",
+          "expr": "sum(rate(tot_request_example[20s]))",
           "format": "time_series",
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "Requests",
           "refId": "A"
+        },
+        {
+          "expr": "sum(kube_pod_container_status_running{container=\"nodejs-example\",namespace=\"dev\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Instances",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -328,7 +340,7 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "2s",
   "schemaVersion": 18,
   "style": "dark",
   "tags": [
@@ -338,7 +350,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -367,7 +379,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "NodeJS (v0.4)",
+  "title": "NodeJS (v0.5.1)",
   "uid": null,
   "version": 1
 }
